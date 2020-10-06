@@ -16,7 +16,7 @@ pipeline {
                 script {
                     app = docker.build("tkoulech/train-schedule")
                     app.inside {
-                        sh 'echo $(curl http://b1676a68351c.mylabserver.com:9090)'
+                        sh 'echo $(curl http://b1676a68351c.mylabserver.com:8080)'
                     }
                 }
             }
