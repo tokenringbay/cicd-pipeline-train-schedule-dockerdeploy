@@ -16,7 +16,7 @@ pipeline {
                 script {
                     app = docker.build("tkoulech/train-schedule")
                     app.inside {
-                        sh 'echo $(curl b1676a68351c.mylabserver.com:8080)'
+                        sh 'echo $(curl http://b1676a68351c.mylabserver.com:9090)'
                     }
                 }
             }
@@ -50,7 +50,7 @@ pipeline {
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name train-schedule -p 8080:8080 -d tkoulech/train-schedule:${env.BUILD_NUMBER}\""
+                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name train-schedule -p 9090:8080 -d tkoulech/train-schedule:${env.BUILD_NUMBER}\""
                     }
                 }
             }
